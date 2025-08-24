@@ -1,0 +1,8 @@
+@import url('https://cdn.fontcdn.ir/Font/Persian/Vazir/Vazir.css');
+@import "tailwindcss";
+
+
+@theme {
+  --font-vazir : "vazir", "sans-serif";
+}
+
