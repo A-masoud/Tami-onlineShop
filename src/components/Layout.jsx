@@ -9,7 +9,7 @@ export function Layout() {
     <div className="flex flex-col font-vazir min-h-screen bg-black">
       <HeaderUp />
       <HeadeDown />
-      <main className="flex-grow w-full max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-10 mx-auto bg-gray-50 pb-[calc(var(--bottom-nav-h,0px)+env(safe-area-inset-bottom))] sm:pb-0">
+      <main className="flex-grow w-full max-w-screen-xl px-4 sm:px-6 md:px-8 lg:px-10 mx-auto">
         <Outlet />
       </main>
       <Footer />
