@@ -25,42 +25,32 @@ function SocialItem({ label, href }) {
   }
 
   return (
-<<<<<<< HEAD
     <a
-      ref={ref}
-      href={href}
-      onMouseMove={onMove}
-      onMouseLeave={onLeave}
-      className="
-        group relative isolate flex items-center justify-between gap-3
-        p-4 sm:p-5 md:p-6
-        bg-black/40 hover:bg-black/50 backdrop-blur-md
-        text-zinc-300 transition-colors hover:text-[#FA6320]
-      "
-    >
-      <span
-        className="
-          pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100
-          transition-opacity duration-300
-          [background:radial-gradient(150px_100px_at_var(--x)_var(--y),rgba(255,255,255,.12),transparent_70%)]
-        "
-        aria-hidden="true"
-      />
-      <span className="relative z-10 text-[13px] sm:text-sm leading-5">{label}</span>
-      <svg
-        className="relative z-10 size-4 sm:size-[18px] md:size-5 transition-transform duration-300 group-hover:translate-x-1"
-        viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
-      >
-        <path d="M9 6l6 6-6 6" />
-      </svg>
-    </a>
+  ref={ref}
+  href={href}
+  onMouseMove={onMove}
+  onMouseLeave={onLeave}
+  className="group relative isolate flex items-center justify-between gap-3 p-4 sm:p-5 md:p-6 bg-black/40 hover:bg-black/50 backdrop-blur-md text-zinc-300 transition-colors hover:text-[#FA6320]"
+>
+  <span
+    className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 [background:radial-gradient(150px_100px_at_var(--x)_var(--y),rgba(255,255,255,.12),transparent_70%)]"
+    aria-hidden="true"
+  />
+  <span className="relative z-10 text-[13px] sm:text-sm leading-5">{label}</span>
+  <svg
+    className="relative z-10 size-4 sm:size-[18px] md:size-5 transition-transform duration-300 group-hover:translate-x-1"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+</a>
   );
 }
-=======
-    <footer className="bg-black text-gray-600 pt-10 pb-20 lg:pb-0 mt-10 text-sm" dir="rtl">
-      <div className="max-w-7xl mx-auto px-4 grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
->>>>>>> 3ac8e6a35f889a10a4b2cc5e11111c016e78717f
 
 const Footer = () => {
   return (
