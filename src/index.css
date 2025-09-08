@@ -8,6 +8,11 @@ html, body {
   overflow-x: hidden;
 }
 
+@theme {
+  --font-vazir : "vazir", "sans-serif";
+}
+
+
 :root{
   --bottom-nav-h: 72px;
 }

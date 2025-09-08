@@ -19,16 +19,10 @@ function AppRoutes() {
       {/* صفحاتی که Layout دارند */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-<<<<<<< HEAD
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/masoudcart" element={<MasoudCart />} />
-=======
-        <Route path="products" element={<Products />} />
-        <Route path="ProductDetail" element={<ProductDetail />} />
-        <Route path="cart" element={<Cart />} />
->>>>>>> 117d9f116e3abd152f9a3964cc4f6e56f345b897
         <Route path="*" element={<NotFound />} />
         <Route path="/category" element={<Category />} />
 
