@@ -12,7 +12,7 @@ export function BottomNavigationBar() {
     "flex flex-col items-center text-gray-600 text-xs hover:text-blue-500 ";
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-400 px-10 py-2 flex justify-between items-center lg:hidden shadow">
+    <div className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-gray-400 px-10 py-2 flex justify-between items-center lg:hidden shadow">
       <Link to="/" className={navItemClass}>
         <HomeIcon className="w-6 h-6 mb-1" />
         <span>خانه</span>

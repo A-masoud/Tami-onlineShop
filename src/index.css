@@ -2,9 +2,21 @@
 @import "tailwindcss";
 
 
-@theme {
-  --font-vazir : "vazir", "sans-serif";
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
+
+:root{
+  --bottom-nav-h: 72px;
+}
+@media (min-width: 640px){
+  :root{ --bottom-nav-h: 0px; }
+}
+
+.no-scrollbar::-webkit-scrollbar{ display:none }
+.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
 
 /* make color variables for the website from palette by Masoud */
 :root{
@@ -14,4 +26,5 @@
   --tertiary-color: #E6E4B2;
   --quaternary-color: #FA6320;
   --quinary-color: #771818;
+  
 }

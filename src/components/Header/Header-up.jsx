@@ -54,7 +54,7 @@ export function HeaderUp() {
   };
 
   return (
-    <header className="bg-gray-100 shadow p-4 flex justify-between items-center">
+    <header className="bg-black shadow p-4 flex justify-between items-center">
       <div className="flex gap-3.5">
         <Link to="/cart" className="hidden lg:flex items-center gap-1 hover:text-blue-700">
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@ export function HeaderUp() {
         ) : (
           <Link
             to="/login"
-            className="flex items-center gap-1 hover:text-blue-700 border hover:border-blue-700 border-gray-300 p-2.5"
+            className="flex items-center gap-1 hover:text-blue-700 border hover:border-blue-700 border-white text-white p-2.5"
           >
             ورود/ ثبت نام
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

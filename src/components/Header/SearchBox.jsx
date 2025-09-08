@@ -23,11 +23,11 @@ export function SearchBox() {
   value={query}
   onChange={(e) => setQuery(e.target.value)}
   className="w-full p-3 pl-10 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm text-right
-    placeholder:text-sm sm:placeholder:text-base md:placeholder:text-lg"
+    placeholder:text-sm text-amber-50 sm:placeholder:text-base md:placeholder:text-lg"
 />
 
       <svg
-        className="w-5 h-5 text-gray-400 absolute left-3 top-3.5"
+        className="w-5 h-5 text-white absolute left-3 top-3.5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
