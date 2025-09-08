@@ -1,5 +1,3 @@
-import React from "react";
-
 export function SizeSelector({ sizes, selectedSize, setSelectedSize }) {
   return (
     <div className="w-2/12 text-right">

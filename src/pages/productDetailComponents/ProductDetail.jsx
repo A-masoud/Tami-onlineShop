@@ -31,7 +31,7 @@ export function ProductDetail() {
         />
 
         {/* Size, Color, Quantity, Description */}
-        <div className="flex mt-3.5 gap-2">
+        <div className="flex h-52 mt-3.5 gap-2">
           <SizeSelector
             sizes={sizes}
             selectedSize={selectedSize}
