@@ -52,7 +52,18 @@ export function ProductDetail() {
         </div>
 
         {/* قیمت و افزودن به سبد خرید */}
-        <PriceAndAddToCart price={180.0} />
+        <PriceAndAddToCart 
+          price={180.0} 
+          productData={{
+            id: 1,
+            title: "هودی مشکی",
+            image: hoodie,
+            selectedColor,
+            selectedSize,
+            quantity,
+            warranty: true
+          }}
+        />
 
       </div>
     </div>
