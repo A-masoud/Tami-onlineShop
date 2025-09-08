@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export function Products() {
   return (
     
-      <div className="grid w-full rounded-xl   mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 p-4 bg-gray-100 ">
+      <div className="grid w-full rounded-xl   mx-auto grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 p-4 bg-black ">
         {products.map((product) => (
           <div
             key={product.id}
@@ -15,7 +15,7 @@ export function Products() {
               shadow-md
               shadow-gray-500
               w-auto
-             bg-gray-50
+             bg-gray-900
               
             "
           >

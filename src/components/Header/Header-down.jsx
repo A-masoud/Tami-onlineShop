@@ -36,15 +36,15 @@ export function HeadeDown() {
   ];
 
   return (
-    <header className="bg-gray-200 shadow p-4 flex  gap-3 lg:flex-row  justify-between lg:items-center">
+    <header className="bg-black shadow p-4 flex  gap-3 lg:flex-row  justify-between lg:items-center">
   {/* شهر و عرضه کالا */}
   <div className="flex flex-col items-center gap-2 flex-nowrap">
     <div className="flex items-center justify-center w-44 border border-gray-500 p-1  rounded-full whitespace-nowrap shrink-0 text-[10px] sm:text-xs px-1.5 sm:px-2">
       <MapPinIcon className="w-3.5 sm:w-4 text-red-400" />
-      <span className="text-gray-500 mr-1">شهر خود را انتخاب کنید</span>
+      <span className="text-white mr-1">شهر خود را انتخاب کنید</span>
     </div>
 
-    <div className="flex items-center w-44 border border-gray-500 p-1 rounded-full whitespace-nowrap shrink-0 text-[10px]  px-1.5 ">
+    <div className="flex items-center w-44 border border-white p-1 rounded-full text-white whitespace-nowrap shrink-0 text-[10px]  px-1.5 ">
       <Link to={'/addProduct'}> افزودن کالا/Admin</Link>
     </div>
   </div>

@@ -1,43 +1,60 @@
-import { useParams } from "react-router-dom";
 import { useState } from "react";
-import { products } from "../../data/fakeData";
-import { ProductImages } from "../productDetailComponents/ProductImages";
-import { ProductInfo } from "../productDetailComponents/ProductInfo";
-import { PurchaseBox } from "../productDetailComponents/PurchaseBox";
+import hoodie from "../../assets/SB004a-copy-removebg.png";
 
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+// Import کامپوننت‌هایی که قبلاً ساختیم
+import { ProductImage } from "./ProductImage";
+import { ProductTitleAndPopularity } from "./ProductTitleAndPopularity";
+import { SizeSelector } from "./SizeSelector";
+import { ColorAndQuantitySelector } from "./ColorAndQuantitySelector";
+import { ProductDescription } from "./ProductDescription";
+import { PriceAndAddToCart } from "./PriceAndAddToCart";
 
 export function ProductDetail() {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === parseInt(id));
-  const [selectedColor, setSelectedColor] = useState(null);
-
-  const dispatch = useDispatch();
-
-  if (!product)
-    return (
-      <div className="text-center text-red-500 mt-10">محصول پیدا نشد 😢</div>
-    );
-
-  const colors =
-    product.colors || ["#FF0000", "#00FF00", "#0000FF", "#000000", "#FFFFFF"];
-
-  const handleAddToCart = (productWithOptions) => {
-    // اینجا رنگ انتخاب شده رو هم به محصول اضافه می‌کنیم
-    dispatch(addToCart({ ...productWithOptions, selectedColor }));
-  };
+  const [quantity, setQuantity] = useState(1);
+  const sizes = ["S", "M", "L", "XL"];
+  const [selectedSize, setSelectedSize] = useState("M");
+  const colors = ["طوسی", "مشکی", "سفید"];
+  const [selectedColor, setSelectedColor] = useState("طوسی");
 
   return (
-    <div className="mx-auto mt-10 max-w-7xl p-3 grid grid-cols-1 md:grid-cols-3 gap-6 border rounded-2xl border-blue-700 text-right">
-      <ProductImages product={product} />
-      <ProductInfo
-        product={product}
-        colors={colors}
-        selectedColor={selectedColor}
-        setSelectedColor={setSelectedColor}
-      />
-      <PurchaseBox product={product} onAddToCart={handleAddToCart} />
+    <div className="text-white min-h-screen flex items-center justify-center p-4">
+      <div className="max-w-sm w-full border bg-black rounded-2xl p-6 shadow-lg">
+
+        {/* تصویر محصول */}
+        <ProductImage src={hoodie} alt="هودی مشکی" />
+
+        {/* عنوان و محبوبیت */}
+        <ProductTitleAndPopularity
+          title="هودی مشکی"
+          category="پوشاک مردانه"
+          popularity="88.8%"
+        />
+
+        {/* Size, Color, Quantity, Description */}
+        <div className="flex h-52 mt-3.5 gap-2">
+          <SizeSelector
+            sizes={sizes}
+            selectedSize={selectedSize}
+            setSelectedSize={setSelectedSize}
+          />
+
+          <ColorAndQuantitySelector
+            colors={colors}
+            selectedColor={selectedColor}
+            setSelectedColor={setSelectedColor}
+            quantity={quantity}
+            setQuantity={setQuantity}
+          />
+
+          <ProductDescription
+            description="هودی مشکی با طراحی مدرن و راحت، مناسب استفاده روزمره و ورزش. پارچه نرم و گرم برای روزهای سرد."
+          />
+        </div>
+
+        {/* قیمت و افزودن به سبد خرید */}
+        <PriceAndAddToCart price={180.0} />
+
+      </div>
     </div>
   );
 }

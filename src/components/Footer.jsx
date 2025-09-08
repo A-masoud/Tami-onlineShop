@@ -1,91 +1,143 @@
-import { Fragment } from "react";
-import Enamad from "../assets/enamad_icon__text_color_blue_1024.png";
-import SazmanDehi from "../assets/file_20200414_1211_69281.jpg";
-import SSL from "../assets/ssl-secured-logo-png_seeklogo-484612.png";
-import {
-  FaInstagram,
-  FaTelegram,
-  FaFacebook,
-  FaTwitter,
-} from "react-icons/fa";
+import React from "react";
 
-export function Footer() {
-  const Hr = () => (
-    <hr className="block md:hidden h-[1px] bg-gray-300 my-6" />
-  );
+const socials = [
+  { label: "فیسبوک", href: "#" },
+  { label: "توییتر", href: "#" },
+  { label: "یوتیوب", href: "#" },
+  { label: "اینستاگرام", href: "#" },
+];
+
+function SocialItem({ label, href }) {
+  const ref = React.useRef(null);
+
+  function onMove(e) {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty("--x", `${e.clientX - r.left}px`);
+    el.style.setProperty("--y", `${e.clientY - r.top}px`);
+  }
+  function onLeave() {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--x", `-9999px`);
+    el.style.setProperty("--y", `-9999px`);
+  }
 
   return (
-    <footer className="bg-gray-100 text-gray-600 pt-10 pb-20 lg:pb-0 mt-10 text-sm" dir="rtl">
+<<<<<<< HEAD
+    <a
+      ref={ref}
+      href={href}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="
+        group relative isolate flex items-center justify-between gap-3
+        p-4 sm:p-5 md:p-6
+        bg-black/40 hover:bg-black/50 backdrop-blur-md
+        text-zinc-300 transition-colors hover:text-[#FA6320]
+      "
+    >
+      <span
+        className="
+          pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100
+          transition-opacity duration-300
+          [background:radial-gradient(150px_100px_at_var(--x)_var(--y),rgba(255,255,255,.12),transparent_70%)]
+        "
+        aria-hidden="true"
+      />
+      <span className="relative z-10 text-[13px] sm:text-sm leading-5">{label}</span>
+      <svg
+        className="relative z-10 size-4 sm:size-[18px] md:size-5 transition-transform duration-300 group-hover:translate-x-1"
+        viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+      >
+        <path d="M9 6l6 6-6 6" />
+      </svg>
+    </a>
+  );
+}
+=======
+    <footer className="bg-black text-gray-600 pt-10 pb-20 lg:pb-0 mt-10 text-sm" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+>>>>>>> 3ac8e6a35f889a10a4b2cc5e11111c016e78717f
 
-        {/* دسترسی سریع */}
-        <div>
-          <h3 className="text-base font-semibold mb-3">دسترسی سریع</h3>
-          <ul className="space-y-2">
-            <li><a href="/" className="hover:text-blue-600 transition">خانه</a></li>
-            <li><a href="/products" className="hover:text-blue-600 transition">محصولات</a></li>
-            <li><a href="/about" className="hover:text-blue-600 transition">درباره ما</a></li>
-            <li><a href="/contact" className="hover:text-blue-600 transition">تماس با ما</a></li>
-            <li><a href="/faq" className="hover:text-blue-600 transition">سوالات متداول</a></li>
-          </ul>
-        </div>
-
-        <Hr />
-
-        {/* ارتباط با ما */}
-        <div>
-          <h3 className="text-base font-semibold mb-3">ارتباط با ما</h3>
-          <ul className="space-y-2">
-            <li>📍 تهران، خیابان مثال، کوچه نمونه</li>
-            <li>📞 ۰۲۱-۱۲۳۴۵۶۷۸</li>
-            <li>✉️ info@myshop.com</li>
-          </ul>
-
-          <div className="flex gap-4 mt-4 text-xl">
-            <a href="#" className="hover:text-pink-500 transition"><FaInstagram /></a>
-            <a href="#" className="hover:text-blue-400 transition"><FaTelegram /></a>
-            <a href="#" className="hover:text-blue-600 transition"><FaFacebook /></a>
-            <a href="#" className="hover:text-sky-400 transition"><FaTwitter /></a>
-          </div>
-        </div>
-
-        <Hr />
-
-        {/* عضویت در خبرنامه */}
-        <div>
-          <h3 className="text-base font-semibold mb-3">با ما در تماس نباشید</h3>
-          <p className="mb-4">ایمیلت رو وارد کن تا اولین نفر باشی که از تخفیف‌ها و خبرهای جدید باخبر میشه 😍</p>
-          <form className="flex flex-col sm:flex-row gap-2">
-            <input
-              type="email"
-              placeholder="ایمیل شما"
-              className="flex-1 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <button
-              type="submit"
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-            >
-              ارسال
-            </button>
-          </form>
-        </div>
-
-        <Hr />
-
-        {/* نمادهای اطمینان */}
-        <div>
-          <h3 className="text-base font-semibold mb-3">نمادهای اطمینانن</h3>
-          <div className="flex flex-wrap gap-1 items-center">
-            <img src={Enamad} alt="ای‌نماد" className="w-16 h-16 border border-gray-400 object-contain" />
-            <img src={SazmanDehi} alt="ساماندهی" className="w-16 h-16 border border-gray-400 object-contain" />
-            <img src={SSL} alt="SSL" className="w-16 h-16 border border-gray-400 object-contain" />
-          </div>
+const Footer = () => {
+  return (
+    <footer className="relative">
+      <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 pt-0 pb-6 sm:pb-8">
+        <div
+          className="
+            relative z-20
+            grid grid-cols-2 md:grid-cols-4
+            rounded-xl md:rounded-2xl overflow-hidden
+            border border-white/5 bg-black/5 backdrop-blur-md
+            shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]
+            divide-y divide-white/10 md:divide-y-0 md:divide-x
+            [direction:rtl]
+          "
+        >
+          {socials.map((s) => <SocialItem key={s.label} {...s} />)}
         </div>
       </div>
 
-      <div className="border-t border-gray-300 mt-10 pt-4 text-center text-xs text-gray-400">
-        © {new Date().getFullYear()} فروشگاه من | تمام حقوق محفوظ است.
+      <div className="relative z-10 w-full">
+        <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+          <div className="
+              grid grid-cols-2 md:grid-cols-4
+              gap-x-6 gap-y-6
+              border-t border-white/10
+              pt-6 sm:pt-8 md:pt-10 pb-4
+            ">
+            <div className="text-center md:text-right">
+              <h3 className="text-[11px] sm:text-xs tracking-widest text-zinc-100/90 mb-2.5 sm:mb-3">درباره ما</h3>
+              <ul className="space-y-2 sm:space-y-2.5 leading-6">
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">قیمت‌ها</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">تماس با ما</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">سؤالات متداول</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">بلاگ</a></li>
+              </ul>
+            </div>
+
+            <div className="text-center md:text-right">
+              <h3 className="text-[11px] sm:text-xs tracking-widest text-zinc-100/90 mb-2.5 sm:mb-3">پشتیبانی</h3>
+              <ul className="space-y-2 sm:space-y-2.5 leading-6">
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">مرکز کمک</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">قوانین</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">حریم خصوصی</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">امنیت</a></li>
+              </ul>
+            </div>
+
+            <div className="text-center md:text-right">
+              <h3 className="text-[11px] sm:text-xs tracking-widest text-zinc-100/90 mb-2.5 sm:mb-3">جامعه</h3>
+              <ul className="space-y-2 sm:space-y-2.5 leading-6">
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">فروم</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">رویدادها</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">همکاران</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">فرصت‌های شغلی</a></li>
+              </ul>
+            </div>
+
+            <div className="text-center md:text-right">
+              <h3 className="text-[11px] sm:text-xs tracking-widest text-zinc-100/90 mb-2.5 sm:mb-3">رسانه</h3>
+              <ul className="space-y-2 sm:space-y-2.5 leading-6">
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">سرمایه‌گذاران</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">شرایط استفاده</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">کوکی‌پالیسی</a></li>
+                <li><a className="text-zinc-200 hover:text-[#FA6320] transition-colors text-[13px] sm:text-sm" href="#">مسائل حقوقی</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="border-t border-white/10 py-4 text-xs text-zinc-400 text-center">
+            © {new Date().getFullYear()} پوشاک تامی — تمامی حقوق محفوظ است.
+          </div>
+        </div>
       </div>
     </footer>
   );
-}
+};
+
+export default Footer;
+export { Footer };

@@ -10,6 +10,7 @@ import { NotFound } from "../pages/NotFound";
 import { Products } from "../pages/Products";
 import { Cart } from "../pages/Cart";
 import { AddProductForm } from "../admin/AddProductForm";
+import Category from "../components/Category";
 
 function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ function AppRoutes() {
         <Route path="products/:id" element={<ProductDetail />} />
         <Route path="cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/category" element={<Category />} />
 
       </Route>
 {/* صفحاتی که Layout ندارند (مثلاً login و signup) */}
