@@ -15,7 +15,8 @@ html, body {
   :root{ --bottom-nav-h: 0px; }
 }
 
-
+.no-scrollbar::-webkit-scrollbar{ display:none }
+.no-scrollbar{ -ms-overflow-style:none; scrollbar-width:none }
 
 /* make color variables for the website from palette by Masoud */
 :root{
