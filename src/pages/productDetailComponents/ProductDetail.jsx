@@ -11,14 +11,14 @@ import { PriceAndAddToCart } from "./PriceAndAddToCart";
 
 export function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
-  const sizes = ["S", "M", "L", "XL"];
+  const sizes = ["S", "M", "L", "XL","2xl"];
   const [selectedSize, setSelectedSize] = useState("M");
   const colors = ["طوسی", "مشکی", "سفید"];
   const [selectedColor, setSelectedColor] = useState("طوسی");
 
   return (
-    <div className="text-white min-h-screen flex items-center justify-center p-4">
-      <div className="max-w-sm w-full border bg-black rounded-2xl p-6 shadow-lg">
+    <div className="text-white border  flex items-center justify-center p-4">
+      <div className="max-w-sm w-full  bg-black rounded-2xl p-6 shadow-lg">
 
         {/* تصویر محصول */}
         <ProductImage src={hoodie} alt="هودی مشکی" />
