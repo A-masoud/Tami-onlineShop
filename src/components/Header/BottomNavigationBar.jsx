@@ -6,6 +6,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/24/outline";
 
+
 export function BottomNavigationBar() {
   const navItemClass =
     "flex flex-col items-center text-gray-600 text-xs hover:text-blue-500 ";

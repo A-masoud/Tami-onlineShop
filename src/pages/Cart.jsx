@@ -5,6 +5,8 @@ export function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
+  const totalPrice = cartItems.reduce((sum, item) => sum + item.price, 0);
+
   if (cartItems.length === 0) {
     return (
       <div className="text-center mt-10 text-gray-600">
@@ -20,7 +22,7 @@ export function Cart() {
         {cartItems.map((item, index) => (
           <li
             key={index}
-            className="flex items-center justify-between border-b py-4 "
+            className="flex items-center justify-between border-b py-4"
           >
             <div className="flex items-center gap-4">
               <img
@@ -58,7 +60,6 @@ export function Cart() {
       </ul>
 
       <div className="mt-6 flex flex-col sm:flex-row sm:justify-between items-center">
-
         <button
           onClick={() => dispatch(clearCart())}
           className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
@@ -66,11 +67,7 @@ export function Cart() {
           خالی کردن سبد خرید
         </button>
         <p className="font-bold text-lg">
-          مجموع:{" "}
-          {cartItems
-            .reduce((sum, item) => sum + item.price, 0)
-            .toLocaleString()}{" "}
-          تومان
+          مجموع: {totalPrice.toLocaleString()} تومان
         </p>
       </div>
     </div>

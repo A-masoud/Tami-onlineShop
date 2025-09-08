@@ -9,6 +9,7 @@ import { ProductDetail } from "../pages/productDetailComponents/ProductDetail";
 import { NotFound } from "../pages/NotFound";
 import { Products } from "../pages/Products";
 import { Cart } from "../pages/Cart";
+import { MasoudCart } from "../pages/MasoudCart";
 import { AddProductForm } from "../admin/AddProductForm";
 
 function AppRoutes() {
@@ -17,9 +18,10 @@ function AppRoutes() {
       {/* صفحاتی که Layout دارند */}
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="products" element={<Products />} />
-        <Route path="products/:id" element={<ProductDetail />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/masoudcart" element={<MasoudCart />} />
         <Route path="*" element={<NotFound />} />
 
       </Route>

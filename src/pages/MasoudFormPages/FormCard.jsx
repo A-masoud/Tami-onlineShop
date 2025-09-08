@@ -1,9 +1,17 @@
 import React from 'react'
+import './SignFormanime.css'
 
-const FormCard = ({children}) => {
+const FormCard = ({children, isFlipped = false, frontContent, backContent}) => {
   return (
-    <div className='flex flex-col shadow-lg shadow-amber-800 bg-gradient-to-b from-[var(--primary-color-light)] to-[var(--primary-color)] w-[22rem] h-[26rem] md:w-3xl items-center justify-center rounded-4xl py-10'>
-        {children}
+    <div className='flip-container enter-animation rounded-2xl'>
+      <div className={`flip-card ${isFlipped ? 'flipped' : ''} shadow-lg rounded-2xl shadow-orange-600`}>
+        <div className='flip-card-front'>
+          {frontContent || children}
+        </div>
+        <div className='flip-card-back'>
+          {backContent || children}
+        </div>
+      </div>
     </div> 
   )
 }
