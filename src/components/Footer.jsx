@@ -15,7 +15,7 @@ export function Footer() {
   );
 
   return (
-    <footer className="bg-gray-100 text-gray-600 pt-10 pb-20 lg:pb-0 mt-10 text-sm" dir="rtl">
+    <footer className="bg-black text-gray-600 pt-10 pb-20 lg:pb-0 mt-10 text-sm" dir="rtl">
       <div className="max-w-7xl mx-auto px-4 grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 
         {/* دسترسی سریع */}
