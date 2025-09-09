@@ -1,8 +1,9 @@
 import React from "react";
+import HeroCardSlider from "../components/MasoudCardSlider/HeroCardSlider";
 
 export function Home() {
   return (
-    <div className="min-h-screen w-full relative flex items-center justify-center bg-slate-900 overflow-hidden">
+    <div className="min-h-screen w-full relative flex items-center justify-center bg-black overflow-hidden">
       {/* Animated colorful blobs behind everything */}
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full"
@@ -16,12 +17,12 @@ export function Home() {
             <feGaussianBlur stdDeviation="40" />
           </filter>
           <linearGradient id="g1" x1="0" x2="1">
-            <stop offset="0%" stopOpacity="0.95" stopColor="#FF7A7A" />
-            <stop offset="100%" stopOpacity="0.9" stopColor="#FFB86B" />
+            <stop offset="0%" stopOpacity="0.95" stopColor="#FA6320" />
+            <stop offset="100%" stopOpacity="0.9" stopColor="#1a0600" />
           </linearGradient>
           <linearGradient id="g2" x1="0" x2="1">
-            <stop offset="0%" stopOpacity="0.9" stopColor="#7AE0FF" />
-            <stop offset="100%" stopOpacity="0.85" stopColor="#7B72FF" />
+            <stop offset="0%" stopOpacity="0.9" stopColor="#a82a00" />
+            <stop offset="100%" stopOpacity="0.85" stopColor="#a82a00" />
           </linearGradient>
         </defs>
 
@@ -45,7 +46,7 @@ export function Home() {
       </svg>
 
       {/* Glass card */}
-      <div className="relative z-20 w-11/12 max-w-3xl p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl text-center">
+      {/* <div className="relative z-20 w-11/12 max-w-3xl p-8 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md shadow-2xl text-center">
         <h1 className="text-3xl font-semibold text-white mb-4">بچه ها خوبه؟</h1>
         <p className="text-sm text-slate-200/90 leading-relaxed mb-4">
           پشت این گلس همه‌چیز محو شده؛ فقط همین کارت مشخصه!
@@ -54,7 +55,9 @@ export function Home() {
           <button className="px-4 py-2 rounded-lg bg-white/10 border border-white/20 text-white text-sm">خوبه</button>
           <button className="px-4 py-2 rounded-lg bg-transparent border border-white/10 text-slate-200 text-sm">هنوز جای کار داره</button>
         </div>
-      </div>
+      </div> */}
+
+        <HeroCardSlider />
 
       <style>{`
         @keyframes floatA {
