@@ -61,7 +61,7 @@ const HeroCardSlider = () => {
             key={item.id}
           >
             <img className="w-44 h-44 object-cover transition-all -translate-y-6 scale-90 duration-500" src={item.image} alt={item.title} />
-            <span className="text-white/10 absolute top-52 w-32">_________________________</span>
+            <span className="text-white/10 absolute top-52 w-44">_________________________</span>
             <h3 className="text-white/80 new-text-shadow text-lg mt-20 font-bold text-center px-2">{item.title}</h3>
             <span className="text-white/90 bg-[var(--quinary-color)] text-center rounded-full w-12 h-6 text-sm mt-2 absolute top-0 right-0 rotate-15">جدید</span>
             <p className="text-[var(--quaternary-color)]/70 animate-pulse new-text-shadow-2 text-2xl font-semibold absolute top-48 left-1/2 transform -translate-x-1/2 text-center">{item.price.toLocaleString()} <span className="text-white/90 text-base">تومان</span></p>
