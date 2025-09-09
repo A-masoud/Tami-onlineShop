@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-export function HeadeDown() {
+export function HeaderDown() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
 
