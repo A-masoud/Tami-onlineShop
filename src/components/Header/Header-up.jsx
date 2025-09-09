@@ -1,109 +1,81 @@
-import { Link } from "react-router-dom";
-import { SearchBox } from "./SearchBox";
-import logo from "../../assets/Tami Shop Logo Design.png";
-import { supabase } from "../../supabase/supabase";
+"use client";
 import { useEffect, useState } from "react";
+import { ShoppingCart, LogIn, ChevronDown, Search } from "lucide-react";
 
-export function HeaderUp() {
-  const [user, setUser] = useState(null);
-  const [fullName, setFullName] = useState("");
+const cn = (...c) => c.filter(Boolean).join(" ");
+
+export default function HeaderUp() {
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    // چک کردن وضعیت فعلی
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      const currentUser = session?.user || null;
-      setUser(currentUser);
-      if (currentUser) fetchFullName(currentUser.id);
-    });
-
-    // گوش دادن به تغییرات لاگین و لاگ‌اوت
-    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
-      const currentUser = session?.user || null;
-      setUser(currentUser);
-      if (currentUser) {
-        fetchFullName(currentUser.id);
-      } else {
-        setFullName("");
-      }
-    });
-
-    return () => listener.subscription.unsubscribe();
+    const onScroll = () => setScrolled((window.scrollY || 0) > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  async function fetchFullName(userId) {
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("full_name")
-      .eq("id", userId)
-      .single();
-
-    if (!error && data) {
-      setFullName(data.full_name);
-    }
-  }
-
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error("🚨 خطا در خروج:", error.message);
-    } else {
-      console.log("✅ کاربر خارج شد");
-      setUser(null);
-      setFullName("");
-    }
-  };
-
   return (
-    <header className="bg-black shadow p-4 flex justify-between items-center">
-      <div className="flex gap-3.5">
-        <Link to="/cart" className="hidden lg:flex items-center gap-1 hover:text-blue-700">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13l2.5 5m6-5v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
-          </svg>
-        </Link>
-
-        {user ? (
-          <>
-            <Link
-              to="/profile"
-              className="flex items-center gap-1 hover:text-blue-700 border hover:border-blue-700 border-gray-300 p-2.5"
-            >
-              {fullName || "پروفایل"}
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
-            </Link>
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-1 text-red-600 border border-red-600 hover:bg-red-50 p-2.5"
-            >
-              خروج
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-            </button>
-          </>
-        ) : (
-          <Link
-            to="/login"
-            className="flex items-center gap-1 hover:text-blue-700 border hover:border-blue-700 border-white text-white p-2.5"
-          >
-            ورود/ ثبت نام
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
-          </Link>
+    <>
+      {/* هدر دسکتاپ: fixed بالا + گلس + تیره‌تر شدن */}
+      <header
+        dir="rtl"
+        className={cn(
+          "hidden lg:block",
+          "fixed top-0 left-0 right-0 z-50 w-full",
+          "transition-[background,box-shadow,border] duration-300",
+          "backdrop-blur-md border-b",
+          scrolled
+            ? "bg-black/60 border-white/10 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)]"
+            : "bg-black/30 border-white/5"
         )}
-      </div>
+      >
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="h-16 flex items-center justify-between gap-4">
+            {/* Logo */}
+            <a href="/" className="flex items-center gap-3 shrink-0 text-white" aria-label="خانه">
+              <div className="h-9 w-9 rounded-full bg-white text-black grid place-items-center font-black">T</div>
+              <span className="hidden xl:inline font-bold tracking-tight">TAMI SHOP</span>
+            </a>
 
-      <div className="flex gap-3.5 w-1/2 items-center">
-        <SearchBox />
-        <img
-          src={logo}
-          alt="logo"
-          className="hidden lg:block w-20 rounded-full border border-blue-700"
-        />
-      </div>
-    </header>
+            {/* Nav */}
+            <nav className="hidden lg:flex items-center gap-2 text-sm">
+              <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">خانه</a>
+              <div className="relative group">
+                <button className="flex items-center gap-1 px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition">
+                  دسته‌بندی‌ها <ChevronDown size={16} />
+                </button>
+                <div className="absolute right-0 mt-2 hidden group-hover:block min-w-48 rounded-2xl bg-black/70 backdrop-blur-md border border-white/10 p-2">
+                  {["بهداشت","آرایشی","خانه و سبک زندگی","سوپرمارکت"].map((i) => (
+                    <a key={i} href="#" className="block px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10">{i}</a>
+                  ))}
+                </div>
+              </div>
+              <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">پرفروش‌ترین‌ها</a>
+              <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">تخفیف‌دارها</a>
+              <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">سوالی دارید؟</a>
+            </nav>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-2">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={18} />
+                  <input
+                    className="peer w-56 lg:w-72 rounded-2xl bg-white/5 text-white placeholder-white/40 border border-white/10 outline-none py-2.5 pl-9 pr-4 focus:bg-white/10 focus:border-white/20 transition"
+                    placeholder="دنبال چی می‌گردی؟"
+                  />
+                </div>
+              </div>
+              <a href="#" className="hidden md:inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 text-white px-3 py-2 transition" title="ورود / ثبت‌نام">
+                <LogIn size={18} /><span className="text-sm">ورود/ثبت‌نام</span>
+              </a>
+              <a href="#" className="inline-flex items-center gap-2 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 text-white px-3 py-2 transition" title="سبد خرید">
+                <ShoppingCart size={18} /><span className="hidden sm:inline text-sm">سبد خرید</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
   );
 }
