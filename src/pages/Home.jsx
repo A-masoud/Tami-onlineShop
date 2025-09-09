@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Home() {
+export function Home() {
   return (
     <div className="min-h-screen w-full relative flex items-center justify-center bg-slate-900 overflow-hidden">
       {/* Animated colorful blobs behind everything */}
