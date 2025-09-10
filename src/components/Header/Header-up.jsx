@@ -29,7 +29,7 @@ export default function HeaderUp() {
             : "bg-black/30 border-white/5"
         )}
       >
-        <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-none px-6">
           <div className="h-16 flex items-center justify-between gap-4">
             {/* Logo */}
             <a href="/" className="flex items-center gap-3 shrink-0 text-white" aria-label="خانه">
