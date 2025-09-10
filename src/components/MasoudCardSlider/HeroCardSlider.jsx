@@ -4,7 +4,7 @@ import "./HeroCardSlider.css";
 
 const HeroCardSlider = () => {
   return (
-    <div className="w-full h-full relative z-50">
+    <div className="w-full h-full relative z-40">
       {/* موبایل: افقی اسکرول */}
       <div 
         className="md:hidden w-full overflow-x-auto scrollbar-hide" 
