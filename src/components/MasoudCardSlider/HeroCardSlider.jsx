@@ -39,7 +39,7 @@ const HeroCardSlider = () => {
         <div className="flex gap-6 px-4 py-6" style={{ width: 'calc(240px * 3 + 48px + 32px)' }}>
           {products.slice(0, 3).map((item) => (
             <div 
-              className="w-60 h-96 hover:scale-105 transition-all duration-700 relative shadow-2xl border-t-2 border-[var(--quaternary-color)]/30 flex flex-col items-center justify-center shadow-black/80 bg-gradient-to-b from-black/90 to-black/50 rounded-2xl flex-shrink-0" 
+              className="w-60 xl:w-72 2xl:w-80 h-72 hover:scale-105 transition-all duration-700 relative shadow-2xl border-t-2 border-[var(--quaternary-color)]/30 flex flex-col items-center justify-center shadow-black/80 bg-gradient-to-b from-black/90 to-black/50 rounded-2xl flex-shrink-0" 
               key={item.id}
             >
               <img className="w-44 h-44 object-cover transition-all -translate-y-10 duration-500" src={item.image} alt={item.title} />
