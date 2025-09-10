@@ -2,7 +2,7 @@ import shoes from  "../assets/8c6b71-1-removebg-preview.png"
 import bag from "../assets/black-aral-30-liter-backpack-model-b145501-1-removebg-preview.png"
 import hody from "../assets/SB004a-copy-removebg.png"
 
-export const products = [
+export const  products = [
   {
     id: 1,
     title: "کتونی نایکی",
