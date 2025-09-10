@@ -56,7 +56,7 @@ const Footer = () => {
   return (
     <footer className="relative">
       {/* سوشال‌بار */}
-      <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 pt-0 pb-6 sm:pb-8">
+      <div className="container mx-auto max-w-none px-4 sm:px-6 lg:px-8 pt-0 pb-6 sm:pb-8">
         <div className="relative z-20 grid grid-cols-2 md:grid-cols-4 rounded-xl md:rounded-2xl overflow-hidden border border-white/10 bg-black/30 backdrop-blur-md shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)] divide-y divide-white/10 md:divide-y-0 md:divide-x [direction:rtl]">
           {socials.map((s) => (
             <SocialItem key={s.label} {...s} />
@@ -66,7 +66,7 @@ const Footer = () => {
 
       {/* بدنه فوتر */}
       <div className="relative z-10 w-full">
-        <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-none px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 border-t border-white/10 pt-6 sm:pt-8 md:pt-10 pb-4">
             <div className="text-center md:text-right">
               <h3 className="text-[11px] sm:text-xs tracking-widest text-zinc-100/90 mb-2.5 sm:mb-3">درباره ما</h3>
