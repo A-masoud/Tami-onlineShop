@@ -1,34 +1,97 @@
-import { Link } from "react-router-dom";
-import {
-  HomeIcon,
-  ShoppingBagIcon,
-  UserCircleIcon,
-  Squares2X2Icon,
-} from "@heroicons/react/24/outline";
+// Header-Down.jsx
+"use client";
+import { useEffect, useRef, useState } from "react";
+import { Home, ListTree, Search, ShoppingCart, User2 } from "lucide-react";
 
+const cx = (...c) => c.filter(Boolean).join(" ");
 
-export function BottomNavigationBar() {
-  const navItemClass =
-    "flex flex-col items-center text-gray-600 text-xs hover:text-blue-500 ";
+export default function HeaderDown() {
+  const [scrolled, setScrolled] = useState(false);
+  const topRef = useRef(null);
+  const bottomRef = useRef(null);
+  const [topH, setTopH] = useState(56);     // fallback
+  const [bottomH, setBottomH] = useState(72);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled((window.scrollY || 0) > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const measure = () => {
+      if (topRef.current)   setTopH(topRef.current.offsetHeight);
+      if (bottomRef.current) setBottomH(bottomRef.current.offsetHeight);
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    const id = setInterval(measure, 200);
+    setTimeout(() => clearInterval(id), 1200);
+    return () => {
+      window.removeEventListener("resize", measure);
+      clearInterval(id);
+    };
+  }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-gray-400 px-10 py-2 flex justify-between items-center lg:hidden shadow">
-      <Link to="/" className={navItemClass}>
-        <HomeIcon className="w-6 h-6 mb-1" />
-        <span>خانه</span>
-      </Link>
-      <Link to="/cart" className={navItemClass}>
-        <ShoppingBagIcon className="w-6 h-6 mb-1" />
-        <span>سبد خرید</span>
-      </Link>
-      <Link to="/account" className={navItemClass}>
-        <UserCircleIcon className="w-6 h-6 mb-1" />
-        <span>حساب کاربری</span>
-      </Link>
-      <Link to="/categories" className={navItemClass}>
-        <Squares2X2Icon className="w-6 h-6 mb-1" />
-        <span>دسته‌بندی</span>
-      </Link>
-    </div>
+    <>
+      {/* ===== هدر بالای موبایل (برند وسط) ===== */}
+      <header
+        ref={topRef}
+        dir="rtl"
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
+        className={cx(
+          "lg:hidden fixed top-0 inset-x-0 z-50",
+          "h-14 flex items-center",
+          "backdrop-blur-md border-b",
+          scrolled ? "bg-black/60 border-white/10" : "bg-black/30 border-white/5"
+        )}
+      >
+        <div className="flex items-center justify-between w-full px-4">
+          <div className="w-9 grid place-items-center">
+            <div className="h-8 w-8 rounded-full bg-white text-black grid place-items-center text-xs font-black">T</div>
+          </div>
+          <h1 className="text-white font-bold tracking-tight text-base">پوشاک تامی</h1>
+          <div className="w-9" aria-hidden />
+        </div>
+      </header>
+
+      {/* اسپیسر بالا به اندازه واقعی هدر */}
+      <div className="lg:hidden" style={{ height: topH }} aria-hidden />
+
+      {/* ===== نوار پایین موبایل ===== */}
+      <nav
+        ref={bottomRef}
+        dir="rtl"
+        style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
+        className={cx(
+          "lg:hidden fixed bottom-0 inset-x-0 z-50",
+          "backdrop-blur-md border-t",
+          scrolled ? "bg-black/60 border-white/10" : "bg-black/30 border-white/5"
+        )}
+        aria-label="پیمایش پایین موبایل"
+      >
+        <ul className="grid grid-cols-5 px-2 py-2">
+          {[
+            { icon: <Home size={22} />, label: "خانه", href: "#" },
+            { icon: <ListTree size={22} />, label: "دسته‌ها", href: "#" },
+            { icon: <Search size={24} />, label: "جستجو", href: "#" },
+            { icon: <ShoppingCart size={22} />, label: "سبد", href: "#" },
+            { icon: <User2 size={22} />, label: "حساب", href: "#" },
+          ].map((item) => (
+            <li key={item.label} className="flex justify-center">
+              <a className="flex flex-col items-center justify-center gap-1 text-[11px] text-white/90" href={item.href}>
+                <div className="p-2 rounded-2xl border border-white/10 bg-white/5">{item.icon}</div>
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* اسپیسر پایین به اندازه واقعی نوار پایین */}
+      <div className="lg:hidden" style={{ height: bottomH }} aria-hidden />
+    </>
   );
 }
