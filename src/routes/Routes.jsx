@@ -20,7 +20,7 @@ function AppRoutes() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="products" element={<Products />} />
-        <Route path="products/:id" element={<ProductDetail />} />
+        <Route path="productdetail" element={<ProductDetail />} />
         <Route path="cart" element={<Cart />} />
         <Route path="masoudcart" element={<MasoudCart />} />
         <Route path="category" element={<Category />} />
