@@ -55,7 +55,7 @@ const Footer = () => {
   return (
     <footer className="relative">
       {/* سوشال‌بار — فاصله‌ی پایینی کمتر شد */}
-      <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8 pt-0 pb-0">
+      <div className="container mx-auto max-w-none px-4 sm:px-6 lg:px-8 pt-0 pb-0">
         <div className="relative z-20 grid grid-cols-2 md:grid-cols-4 rounded-xl md:rounded-2xl overflow-hidden
                         border border-white/10 bg-black/30 backdrop-blur-md
                         shadow-[0_8px_40px_-12px_rgba(0,0,0,0.6)]
@@ -66,7 +66,7 @@ const Footer = () => {
 
       {/* بدنهٔ فوتر — خط زیر عنوان + جداکننده افقی/عمودی بین لینک‌ها */}
       <div className="relative z-10 w-full">
-        <div className="container mx-auto max-w-screen-2xl px-4 sm:px-6 lg:px-8">
+        <div className="container mx-auto max-w-none px-4 sm:px-6 lg:px-8">
           <div
             className="
               grid grid-cols-2 md:grid-cols-4

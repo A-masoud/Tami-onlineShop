@@ -40,16 +40,40 @@ export default function HeaderUp() {
             {/* Nav */}
             <nav className="hidden lg:flex items-center gap-2 text-sm">
               <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">خانه</a>
-              <div className="relative group">
+             <div
+                className="
+                  relative group
+                  before:content-[''] before:absolute before:left-0 before:right-0 before:top-full before:h-2
+                "
+              >
                 <button className="flex items-center gap-1 px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition">
                   دسته‌بندی‌ها <ChevronDown size={16} />
                 </button>
-                <div className="absolute right-0 mt-2 hidden group-hover:block min-w-48 rounded-2xl bg-black/70 backdrop-blur-md border border-white/10 p-2">
-                  {["بهداشت","آرایشی","خانه و سبک زندگی","سوپرمارکت"].map((i) => (
-                    <a key={i} href="#" className="block px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10">{i}</a>
-                  ))}
+
+                {/* کانتینر فاصله + موقعیت */}
+                <div className="absolute right-0 top-full min-w-56 pt-2 z-50">
+                  {/* خود منو */}
+                  <div
+                    className="
+                      rounded-2xl bg-black/70 backdrop-blur-md border border-white/10 p-2
+                      opacity-0 translate-y-1 pointer-events-none
+                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto
+                      focus-within:opacity-100 focus-within:translate-y-0 focus-within:pointer-events-auto
+                      transition duration-150
+                    "
+                  >
+                    {['بهداشت','آرایشی','خانه و سبک زندگی','سوپرمارکت'].map(item => (
+                      <a
+                        key={item}
+                        href="#"
+                        className="block px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10"
+                      >
+                        {item}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </div>  
               <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">پرفروش‌ترین‌ها</a>
               <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">تخفیف‌دارها</a>
               <a className="px-3 py-2 rounded-xl text-white/80 hover:text-white hover:bg-white/10 transition" href="#">سوالی دارید؟</a>
