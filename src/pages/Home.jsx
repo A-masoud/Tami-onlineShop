@@ -3,7 +3,7 @@ import HeroCardSlider from "../components/MasoudCardSlider/HeroCardSlider";
 
 export function Home() {
   return (
-    <div className="min-h-screen w-full relative flex items-center justify-center bg-black overflow-hidden">
+    <div className="min-h-screen w-full flex items-center justify-center bg-black overflow-hidden">
       {/* Animated colorful blobs behind everything */}
       <svg
         className="pointer-events-none absolute inset-0 h-full w-full"
