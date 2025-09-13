@@ -126,6 +126,99 @@
   color: var(--admin-secondary);
 }
 
+/* Status Cards */
+.admin-status-cards-container {
+  padding: 1.5rem;
+}
+
+.admin-status-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.admin-status-card {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-status-card:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  border-color: rgba(250, 99, 32, 0.3);
+}
+
+.admin-status-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.admin-status-card-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: rgba(250, 99, 32, 0.2);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-quaternary);
+}
+
+.admin-status-card-title {
+  font-size: 0.875rem;
+  color: #d1d5db;
+  font-weight: 500;
+}
+
+.admin-status-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-status-card-value {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.admin-status-card-currency {
+  font-size: 1rem;
+  color: #9ca3af;
+  font-weight: 500;
+}
+
+.admin-status-card-number {
+  font-size: 1.875rem;
+  font-weight: bold;
+  color: var(--admin-secondary);
+}
+
+.admin-status-card-change {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.admin-status-card-change.text-green-500 {
+  color: #22c55e;
+}
+
+.admin-status-card-change.text-red-500 {
+  color: #ef4444;
+}
+
 /* Accent Colors */
 .admin-accent-orange {
   color: var(--admin-quaternary);
@@ -338,6 +431,46 @@
   
   .admin-main-content {
     margin-left: 80px;
+  }
+  
+  /* Status Cards Mobile */
+  .admin-status-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .admin-status-cards-container {
+    padding: 1rem;
+  }
+  
+  .admin-status-card {
+    padding: 1rem;
+  }
+  
+  .admin-status-card-header {
+    margin-bottom: 0.75rem;
+  }
+  
+  .admin-status-card-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+  
+  .admin-status-card-icon .w-6 {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .admin-status-card-title {
+    font-size: 0.75rem;
+  }
+  
+  .admin-status-card-number {
+    font-size: 1.5rem;
+  }
+  
+  .admin-status-card-change {
+    font-size: 0.75rem;
   }
 }
 
