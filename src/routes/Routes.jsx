@@ -12,6 +12,7 @@ import { Cart } from "../pages/Cart";
 import { MasoudCart } from "../pages/MasoudCart";
 import { AddProductForm } from "../admin/AddProductForm";
 import Category from "../components/Category";
+import AdminPanel from "../pages/AdminPanel";
 
 function AppRoutes() {
   return (
@@ -20,8 +21,8 @@ function AppRoutes() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="products" element={<Products />} />
-        <Route path="products/:id" element={<ProductDetail />} />
-        <Route path="cart" element={<Cart />} />
+        <Route path="productdetail" element={<ProductDetail />} />
+        <Route path="cart" element={<MasoudCart />} />
         <Route path="masoudcart" element={<MasoudCart />} />
         <Route path="category" element={<Category />} />
         <Route path="*" element={<NotFound />} />
@@ -30,6 +31,7 @@ function AppRoutes() {
         <Route path="/login" element={<SignForm />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/addProduct" element={<AddProductForm/>}/>
+        <Route path="/admin" element={<AdminPanel/>}/>
     </Routes>
   );
 }
