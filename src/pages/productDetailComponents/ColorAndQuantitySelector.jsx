@@ -1,5 +1,3 @@
-
-
 export function ColorAndQuantitySelector({ colors, selectedColor, setSelectedColor, quantity, setQuantity }) {
   return (
     <div className="w-4/12 flex flex-col pb-1.5 gap-2 text-right">
@@ -16,20 +14,35 @@ export function ColorAndQuantitySelector({ colors, selectedColor, setSelectedCol
         ))}
       </select>
 
-      <div className="flex bg-neutral-900 p-2 rounded-2xl gap-2 h-full items-center mt-2">
-        <button
-          onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
-          className="w-10 h-full flex items-center justify-center bg-neutral-700 rounded-lg text-lg"
-        >
-          -
-        </button>
-        <span className="text-xl">{quantity}</span>
-        <button
-          onClick={() => setQuantity(quantity + 1)}
-          className="w-10 h-full flex items-center justify-center bg-neutral-700 rounded-lg text-lg"
-        >
-          +
-        </button>
+      {/* تعداد */}
+      <div className="relative flex items-center bg-neutral-900 p-2 rounded-2xl gap-2 h-full mt-2">
+        {/* Wrapper دکمه‌ها:
+            - موبایل: افقی و هر دکمه نصف عرض (w-1/2)
+            - md+: ستونی و اندازه کوچک (md:w-10) */}
+        <div className="flex h-20 md:h-full w-full md:w-auto md:flex-col items-center gap-5">
+          <button
+            onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+            className="w-1/2 h-full md:w-10 md:h-10 flex items-center justify-center bg-neutral-700 rounded-lg text-lg"
+            aria-label="decrease quantity"
+          >
+            -
+          </button>
+
+          <button
+            onClick={() => setQuantity(quantity + 1)}
+            className="w-1/2 h-full md:w-10 md:h-10 flex items-center justify-center bg-neutral-700 rounded-lg text-lg"
+            aria-label="increase quantity"
+          >
+            +
+          </button>
+        </div>
+
+        {/* عدد:
+            - موبایل: absolute وسط (روی دکمه‌ها قرار می‌گیره)
+            - md+: حالتی استاتیک و با ml-auto به سمت راست می‌رود */}
+        <span className="text-xl absolute left-1/2 -translate-x-1/2 pointer-events-none md:static md:mx-auto ">
+          {quantity}
+        </span>
       </div>
     </div>
   );
