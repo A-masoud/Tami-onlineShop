@@ -1,28 +1,27 @@
 import React from "react";
+import { Facebook, Twitter, Youtube, Instagram } from "lucide-react";
 
 const socials = [
-  { label: "فیسبوک", href: "#" },
-  { label: "توییتر", href: "#" },
-  { label: "یوتیوب", href: "#" },
-  { label: "اینستاگرام", href: "#" },
+  { label: "فیسبوک",    href: "#", Icon: Facebook },
+  { label: "توییتر",    href: "#", Icon: Twitter  },
+  { label: "یوتیوب",    href: "#", Icon: Youtube  },
+  { label: "اینستاگرام", href: "#", Icon: Instagram },
 ];
 
-function SocialItem({ label, href }) {
+function SocialItem({ label, href, Icon }) {
   const ref = React.useRef(null);
 
-  function onMove(e) {
-    const el = ref.current;
-    if (!el) return;
+  const onMove = (e) => {
+    const el = ref.current; if (!el) return;
     const r = el.getBoundingClientRect();
     el.style.setProperty("--x", `${e.clientX - r.left}px`);
     el.style.setProperty("--y", `${e.clientY - r.top}px`);
-  }
-  function onLeave() {
-    const el = ref.current;
-    if (!el) return;
+  };
+  const onLeave = () => {
+    const el = ref.current; if (!el) return;
     el.style.setProperty("--x", `-9999px`);
     el.style.setProperty("--y", `-9999px`);
-  }
+  };
 
   return (
     <a
@@ -35,21 +34,30 @@ function SocialItem({ label, href }) {
                  text-zinc-300 transition-colors hover:text-[#FA6320]"
     >
       <span
+        aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100
                    transition-opacity duration-300
                    [background:radial-gradient(150px_100px_at_var(--x)_var(--y),rgba(255,255,255,.12),transparent_70%)]"
-        aria-hidden="true"
       />
-      <span className="relative z-10 text-[13px] sm:text-sm leading-5">{label}</span>
+
+      <span className="relative z-10 flex items-center gap-2">
+        {Icon && <Icon className="w-4 h-4 sm:w-5 sm:h-5" strokeWidth={1.75} />}
+        <span className="text-[13px] sm:text-sm leading-5">{label}</span>
+      </span>
+
       <svg
         className="relative z-10 size-4 sm:size-[18px] md:size-5 transition-transform duration-300 group-hover:translate-x-1"
-        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"
+        viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6"
+        strokeLinecap="round" strokeLinejoin="round"
       >
         <path d="M9 6l6 6-6 6" />
       </svg>
     </a>
   );
 }
+
+{socials.map((s) => <SocialItem key={s.label} {...s} />)}
+{socials.map((s) => <SocialItem key={s.label} label={s.label} href={s.href} Icon={s.Icon} />)}
 
 const Footer = () => {
   return (
