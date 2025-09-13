@@ -58,7 +58,7 @@ const StatusCards = () => {
           const ChangeIcon = getChangeIcon(item.changeType);
           
           return (
-            <div key={item.id} className="admin-status-card">
+            <div key={item.id} className="admin-status-card admin-glass-shimmer">
               <div className="admin-status-card-header">
                 <div className="admin-status-card-icon">
                   <Icon className="w-6 h-6" />

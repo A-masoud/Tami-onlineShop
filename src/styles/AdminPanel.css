@@ -20,6 +20,8 @@
 
 /* Sidebar Styles */
 .admin-sidebar {
+  width: 280px;
+  min-width: 100px;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -27,6 +29,9 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Glass Effect - Only for Mobile */
@@ -118,6 +123,27 @@
   position: relative;
   z-index: 2;
   padding: 0.5rem;
+  padding-bottom: 2rem;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.admin-nav-container::-webkit-scrollbar {
+  width: 4px;
+}
+
+.admin-nav-container::-webkit-scrollbar-track {
+  background: rgba(55, 65, 81, 0.2);
+}
+
+.admin-nav-container::-webkit-scrollbar-thumb {
+  background: rgba(107, 114, 128, 0.4);
+  border-radius: 2px;
+}
+
+.admin-nav-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.6);
 }
 
 /* Main Content Area */
@@ -138,20 +164,21 @@
 }
 
 .admin-status-card {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.5rem;
   padding: 1.5rem;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .admin-status-card:hover {
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.7);
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
   border-color: rgba(250, 99, 32, 0.3);
 }
 
@@ -217,6 +244,62 @@
 
 .admin-status-card-change.text-red-500 {
   color: #ef4444;
+}
+
+/* Submenu Styles */
+.admin-submenu {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(5px);
+  border-right: 2px solid rgba(250, 99, 32, 0.3);
+  margin: 0.25rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  animation: slideDown 0.3s ease-out;
+  width: calc(100% - 0.5rem);
+}
+
+.admin-submenu-item {
+  background: transparent;
+  color: #9ca3af;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border: none;
+  position: relative;
+}
+
+.admin-submenu-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--admin-secondary);
+  transform: translateX(4px);
+}
+
+.admin-submenu-item.active {
+  background: rgba(250, 99, 32, 0.2);
+  color: var(--admin-quaternary);
+  border-right: 3px solid var(--admin-quaternary);
+}
+
+.admin-submenu-item::before {
+  content: '•';
+  position: absolute;
+  right: 1rem;
+  color: rgba(250, 99, 32, 0.5);
+  font-size: 0.75rem;
+}
+
+.admin-submenu-item.active::before {
+  color: var(--admin-quaternary);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Accent Colors */
@@ -328,17 +411,19 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .admin-sidebar {
-    width: 80px;
+    width: 60px;
     position: fixed;
     top: 0;
     left: 0;
     height: 100vh;
     z-index: 50;
     transition: width 0.3s ease;
+    display: flex;
+    flex-direction: column;
   }
   
   .admin-sidebar.expanded {
-    width: 250px;
+    width: 80px;
   }
   
   .admin-logo {
@@ -358,6 +443,10 @@
   
   .admin-nav-container {
     padding: 0.25rem;
+    padding-bottom: 2rem;
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   
   .admin-sidebar-item {
@@ -378,6 +467,8 @@
   .admin-sidebar-item .admin-nav-icon {
     margin-left: 0;
     margin-right: 0.5rem;
+    /* width: 1.5rem;
+    height: 1.5rem; */
   }
   
   .admin-sidebar.expanded .admin-sidebar-item .admin-nav-icon {
@@ -396,7 +487,7 @@
   /* Tooltip Styles */
   .admin-tooltip {
     position: absolute;
-    right: 100%;
+    right: 10%;
     top: 50%;
     transform: translateY(-50%);
     background: rgba(0, 0, 0, 0.9);
@@ -445,6 +536,9 @@
   
   .admin-status-card {
     padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   }
   
   .admin-status-card-header {
@@ -471,6 +565,22 @@
   
   .admin-status-card-change {
     font-size: 0.75rem;
+  }
+  
+  /* Submenu Mobile */
+  .admin-submenu {
+    margin: 0.25rem;
+    width: calc(100% - 0.5rem);
+  }
+  
+  .admin-submenu-item {
+    font-size: 0.75rem;
+    padding: 0.5rem 1rem;
+  }
+  
+  .admin-submenu-item::before {
+    right: 0.75rem;
+    font-size: 0.625rem;
   }
 }
 
