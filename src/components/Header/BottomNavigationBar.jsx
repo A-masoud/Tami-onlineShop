@@ -9,7 +9,7 @@ export default function HeaderDown() {
   const [scrolled, setScrolled] = useState(false);
   const topRef = useRef(null);
   const bottomRef = useRef(null);
-  const [topH, setTopH] = useState(56);     // fallback
+  const [topH, setTopH] = useState(56);   // fallback
   const [bottomH, setBottomH] = useState(72);
 
   useEffect(() => {
@@ -21,8 +21,13 @@ export default function HeaderDown() {
 
   useEffect(() => {
     const measure = () => {
-      if (topRef.current)   setTopH(topRef.current.offsetHeight);
-      if (bottomRef.current) setBottomH(bottomRef.current.offsetHeight);
+      if (topRef.current) setTopH(topRef.current.offsetHeight);
+      if (bottomRef.current) {
+        const h = bottomRef.current.offsetHeight;
+        setBottomH(h);
+        // ارتفاع نوار پایین را به صورت سراسری اعلام کن (برای شیت فیلتر)
+        document.documentElement.style.setProperty("--tabbar-h", `${h}px`);
+      }
     };
     measure();
     window.addEventListener("resize", measure);
@@ -36,7 +41,7 @@ export default function HeaderDown() {
 
   return (
     <>
-      {/* ===== هدر بالای موبایل (برند وسط) ===== */}
+      {/* ===== هدر بالای موبایل ===== */}
       <header
         ref={topRef}
         dir="rtl"
@@ -57,7 +62,7 @@ export default function HeaderDown() {
         </div>
       </header>
 
-      {/* اسپیسر بالا به اندازه واقعی هدر */}
+      {/* اسپیسر برابر ارتفاع هدر */}
       <div className="lg:hidden" style={{ height: topH }} aria-hidden />
 
       {/* ===== نوار پایین موبایل ===== */}
@@ -90,7 +95,7 @@ export default function HeaderDown() {
         </ul>
       </nav>
 
-      {/* اسپیسر پایین به اندازه واقعی نوار پایین */}
+      {/* اسپیسر برابر ارتفاع نوار پایین */}
       <div className="lg:hidden" style={{ height: bottomH }} aria-hidden />
     </>
   );
