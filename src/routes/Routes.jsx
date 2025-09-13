@@ -22,11 +22,7 @@ function AppRoutes() {
         <Route index element={<Home />} />
         <Route path="products" element={<Products />} />
         <Route path="productdetail" element={<ProductDetail />} />
-<<<<<<< HEAD
         <Route path="cart" element={<Cart />} />
-=======
-        <Route path="cart" element={<MasoudCart />} />
->>>>>>> mdg
         <Route path="masoudcart" element={<MasoudCart />} />
         <Route path="category" element={<Category />} />
         <Route path="*" element={<NotFound />} />
