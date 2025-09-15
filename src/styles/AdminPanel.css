@@ -658,3 +658,209 @@
 .admin-loading {
   animation: admin-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
+
+/* Product Cards Styles */
+.admin-product-cards-container {
+  padding: 1.5rem;
+  margin-top: 0;
+}
+
+.admin-product-cards-section {
+  margin-bottom: 2rem;
+}
+
+.admin-product-cards-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--admin-secondary);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(250, 99, 32, 0.3);
+}
+
+.admin-product-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+.admin-product-card {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.75rem;
+  padding:0.2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.admin-product-card:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  border-color: rgba(250, 99, 32, 0.3);
+}
+
+.admin-product-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .25rem;
+}
+
+.admin-product-card-icon {
+  width: 2rem;
+  height: 2rem;
+  background: rgba(250, 99, 32, 0.2);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--admin-quaternary);
+}
+
+.admin-product-card-type {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 500;
+  background: rgba(250, 99, 32, 0.1);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  border: 1px solid rgba(250, 99, 32, 0.2);
+}
+
+.admin-product-card-image {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 0.75rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.admin-product-card:hover .admin-product-image {
+  transform: scale(1.05);
+}
+
+.admin-product-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-product-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--admin-secondary);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.admin-product-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.admin-product-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.admin-product-stat svg {
+  color: var(--admin-quaternary);
+}
+
+.admin-product-revenue {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(250, 99, 32, 0.1);
+  border-radius: 0.375rem;
+  border: 1px solid rgba(250, 99, 32, 0.2);
+}
+
+.admin-product-revenue-label {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.admin-product-revenue-value {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: var(--admin-quaternary);
+}
+
+/* Mobile Responsive for Product Cards */
+@media (max-width: 768px) {
+  .admin-product-cards-container {
+    padding: 1rem;
+    margin-top: 0;
+  }
+  
+  .admin-product-cards-title {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .admin-product-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  
+  .admin-product-card {
+    padding: 0.75rem;
+  }
+  
+  .admin-product-card-image {
+    height: 80px;
+  }
+  
+  .admin-product-name {
+    font-size: 0.75rem;
+  }
+  
+  .admin-product-stat {
+    font-size: 0.65rem;
+  }
+  
+  .admin-product-revenue-label,
+  .admin-product-revenue-value {
+    font-size: 0.7rem;
+  }
+  
+  .admin-product-card-type {
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .admin-product-card-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .admin-product-card-icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}

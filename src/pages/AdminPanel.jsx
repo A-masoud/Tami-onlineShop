@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../components/AdminComps/Sidebar';
 import StatusCards from '../components/AdminComps/StatusCards';
+import ProductCards from '../components/AdminComps/ProductCards';
 import '../styles/AdminPanel.css';
 
 const AdminPanel = () => {
@@ -17,6 +18,8 @@ const AdminPanel = () => {
           </div>
           
           <StatusCards />
+          
+          <ProductCards />
           
           <div className="mt-8 text-center">
             <div className="flex gap-4 justify-center">
