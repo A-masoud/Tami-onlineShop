@@ -1,0 +1,71 @@
+function init() {
+  function log(params) {
+    try {
+      fetch(
+        'https://sentry.basalam.com/api/253/store/?sentry_key=6823f22bfc3f44ae947a1e18d538b344&sentry_version=7',
+        {
+          method: 'POST',
+          body: JSON.stringify({
+            level: 'error',
+            stack: params.stack,
+            message: params.message,
+            errorName: params.errorName,
+            tags: {
+              stage: 'early',
+              type: params.type,
+              isWebview: !!window.WebViewInterface,
+            },
+            request: {
+              url: window.location.href,
+              headers: {
+                'User-Agent': window.navigator.userAgent,
+              },
+            },
+          }),
+        }
+      )
+    } catch (error) {
+      console.warn(error)
+    }
+  }
+
+  window.addEventListener('error', function logError(event) {
+    try {
+      if (window.isAppMounted) {
+        return
+      }
+
+      log({
+        type: 'error',
+        stack: (event && event.error && event.error.stack) || undefined,
+        errorName: (event && event.error && event.error.name) || undefined,
+        message: (event && event.error && event.error.message) || 'EARLY_ERROR',
+      })
+    } catch (error) {
+      console.warn(error)
+    }
+  })
+
+  window.addEventListener('unhandledrejection', function logUnhandledRejection(event) {
+    try {
+      if (window.isAppMounted) {
+        return
+      }
+
+      const eventReason = (event && event.reason) || undefined
+      const detailReason = (event && event.detail && event.detail.reason) || undefined
+      const reason = eventReason || detailReason || undefined
+
+      log({
+        type: 'unhandledrejection',
+        stack: (reason && reason.stack) || undefined,
+        errorName: (reason && reason.name) || 'UnhandledRejection',
+        message: (reason && (reason.message || String(reason))) || 'EARLY_REJECTION',
+      })
+    } catch (error) {
+      console.warn(error)
+    }
+  })
+}
+
+init()

@@ -4,7 +4,7 @@ import { SignupPage } from "../pages/signupComponents/Signup";
 
 // 👇🏻👇🏻 Last import change and added new import for SignForm Page 👇🏻👇🏻
 import  SignForm  from "../pages/MasoudFormPages/SignForm";
-import { Home } from "../pages/Home";
+import { Home } from "../pages/home/Home";
 import { ProductDetail } from "../pages/productDetailComponents/ProductDetail";
 import { NotFound } from "../pages/NotFound";
 import { Products } from "../pages/Products";
