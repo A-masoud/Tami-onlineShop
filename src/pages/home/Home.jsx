@@ -5,7 +5,6 @@ import { FeaturedProducts } from "./FeaturedProducts";
 import { BlogSection } from "./BlogSection";
 import { StoreFeatures } from "./StoreFeatures";
 import backgraund from "../../assets/27915050_psdd_03_06_2022_85.png";
-
 export function Home() {
   return (
     <div
