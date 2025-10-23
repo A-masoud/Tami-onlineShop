@@ -1,5 +1,5 @@
+import axios from "axios";
 import imge from "../../assets/svg/undraw_forms_1ciz.svg";
-import { supabase } from "../../supabase/supabase";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -7,7 +7,6 @@ import { useState } from "react";
 import { schema } from "./yup";
 import { InputField } from "./InputField";
 
-// =================== SignupPage ===================
 export function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
@@ -22,7 +21,6 @@ export function SignupPage() {
     resolver: yupResolver(schema),
   });
 
-  // =================== پیام موفقیت و خطا ===================
   function handleError(msg) {
     setMessage({ text: msg, type: "error" });
     setLoading(false);
@@ -39,41 +37,29 @@ export function SignupPage() {
       setLoading(true);
       setMessage({ text: "", type: "" });
 
-      // ثبت‌نام اولیه
-      const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+      // ارسال داده‌ها به بک‌اند
+      const res = await axios.post("http://localhost:5000/api/auth/signup", {
+        fullName: data.fullName,
         email: data.email,
         password: data.password,
       });
-      if (signUpError) throw new Error(signUpError.message);
 
-      const userId = signUpData.user?.id;
-      if (!userId) throw new Error("شناسه کاربر پیدا نشد.");
-
-      // آپدیت نام کامل در جدول profiles
-      const { error: profileError } = await supabase
-        .from("profiles")
-        .update({ full_name: data.fullName })
-        .eq("id", userId);
-      if (profileError) throw new Error("خطا در ذخیره اطلاعات پروفایل: " + profileError.message);
-
-      handleSuccess("ثبت‌نام موفق بود 🎉 لطفا ایمیل‌تان را تایید کنید.");
+      handleSuccess(res.data.message);
       reset();
       navigate("/");
     } catch (err) {
-      handleError(err.message);
+      if (err.response) handleError(err.response.data.message);
+      else handleError("خطا در برقراری ارتباط با سرور");
     }
   }
 
   return (
     <div className="min-h-screen bg-gradient-to-tr from-gray-200 to-blue-400 flex items-center justify-center p-4 font-vazir">
       <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-4xl grid md:grid-cols-2">
-
-        {/* تصویر سمت چپ */}
         <div className="hidden md:flex items-center justify-center bg-white p-10">
           <img src={imge} alt="Signup Illustration" className="max-h-200 shadow-lg" />
         </div>
 
-        {/* فرم سمت راست */}
         <div className="flex flex-col justify-center p-10 text-right">
           <h2 className="text-3xl font-semibold mb-1 text-gray-800">خوش اومدی!</h2>
           <p className="text-lg text-purple-700 font-bold mb-6">ساخت حساب کاربری</p>
@@ -116,7 +102,6 @@ export function SignupPage() {
               disabled={loading}
             />
 
-            {/* دکمه ارسال */}
             <button
               type="submit"
               disabled={loading}
@@ -128,7 +113,6 @@ export function SignupPage() {
             </button>
           </form>
 
-          {/* پیام کلی */}
           {message.text && (
             <p
               className={`mt-4 text-center ${

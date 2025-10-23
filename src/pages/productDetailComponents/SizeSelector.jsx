@@ -60,14 +60,16 @@ export function SizeSelector({ sizes, selectedSize, setSelectedSize }) {
   );
 
   return (
-    <div className="relative w-16 h-full">
+    <div className="relative text-right rounded-2xl w-16 h-full">
+      <span className="text-gray-500 ">سایز</span>
       <div
         ref={containerRef}
         style={padStyle}
-        className="h-full overflow-y-auto snap-y snap-mandatory no-scrollbar rounded-2xl"
+        className="h-[180px] overflow-y-auto  bg-neutral-900 snap-y snap-mandatory no-scrollbar rounded-2xl"
         role="listbox"
         aria-activedescendant={`size-${activeIndex}`}
       >
+        
         {sizes.map((size, i) => {
           const active = i === activeIndex;
           return (
@@ -79,7 +81,7 @@ export function SizeSelector({ sizes, selectedSize, setSelectedSize }) {
               aria-selected={active}
               onClick={() => { setActiveIndex(i); setSelectedSize(size); scrollToIndex(i); }}
               className={[
-                "snap-center h-14 flex items-center justify-center font-semibold text-base relative",
+                "snap-center h-12 flex items-center justify-center font-semibold text-base relative",
                 "transition-transform duration-150",
                 active ? "scale-110" : "opacity-60",
               ].join(" ")}

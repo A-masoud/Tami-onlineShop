@@ -82,9 +82,8 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
       icon: Users,
       submenu: [
         'لیست کاربران ثبت‌نام‌شده',
-        'مشاهده جزئیات پروفایل',
         'بلاک / فعال‌سازی کاربر',
-        'مدیریت اسلایدرها'
+        
       ]
     },
     { id: 'analysis', label: 'تحلیل', icon: TrendingUp },
@@ -183,6 +182,7 @@ const Sidebar = ({ activeTab, setActiveTab }) => {
                        return; // غیرفعال در حالت بسته
                      }
                      toggleSubmenu(item.id);
+                     setActiveTab(item.id)
                    } else {
                      setActiveTab(item.id);
                      if (isMobile) {

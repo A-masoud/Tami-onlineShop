@@ -3,7 +3,7 @@ import { ChevronsRight } from "lucide-react";
 
 export function ProductDescription({ description }) {
   return (
-    <div className="flex-1  text-right">
+    <div className="flex-1 text-right">
       <h3 className="text-gray-500">توضیحات</h3>
       <div className="h-44 mt-2 flex flex-col justify-between ">
         <p className="text-[13px] text-neutral-300 overflow-hidden h-3/4 p-3.5 bg-neutral-900 rounded-2xl">

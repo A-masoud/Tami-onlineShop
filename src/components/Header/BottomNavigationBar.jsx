@@ -2,6 +2,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { Home, ListTree, Search, ShoppingCart, User2 } from "lucide-react";
+import logo from '../../assets/tommy shop logo.png'
 
 const cx = (...c) => c.filter(Boolean).join(" ");
 
@@ -55,7 +56,7 @@ export default function HeaderDown() {
       >
         <div className="flex items-center justify-between w-full px-4">
           <div className="w-9 grid place-items-center">
-            <div className="h-8 w-8 rounded-full bg-white text-black grid place-items-center text-xs font-black">T</div>
+            <div className=" w-15 rounded-full "><img src={logo} alt="" /></div>
           </div>
           <h1 className="text-white font-bold tracking-tight text-base">پوشاک تامی</h1>
           <div className="w-9" aria-hidden />

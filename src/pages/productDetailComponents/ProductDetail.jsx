@@ -1,7 +1,6 @@
-import { useState } from "react";
-import hoodie from "../../assets/SB004a-copy-removebg.png";
-
-// Import کامپوننت‌هایی که قبلاً ساختیم
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import { ProductImage } from "./ProductImage";
 import { ProductTitleAndPopularity } from "./ProductTitleAndPopularity";
 import { SizeSelector } from "./SizeSelector";
@@ -10,40 +9,62 @@ import { ProductDescription } from "./ProductDescription";
 import { PriceAndAddToCart } from "./PriceAndAddToCart";
 
 export function ProductDetail() {
+  const { id } = useParams(); // گرفتن آیدی از URL
+  const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
-  const sizes = ["S", "M", "L", "XL", "2xl"];
-  const [selectedSize, setSelectedSize] = useState("M");
-  const colors = ["طوسی", "مشکی", "سفید"];
-  const [selectedColor, setSelectedColor] = useState("طوسی");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [selectedColor, setSelectedColor] = useState("");
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const res = await axios.get(`http://localhost:5000/api/products/${id}`);
+        console.log(res.data)
+
+        setProduct(res.data);
+
+        // ست کردن مقادیر پیش‌فرض سایز و رنگ
+        if (res.data.sizes && res.data.sizes.length > 0)
+          setSelectedSize(res.data.sizes[0]);
+        if (res.data.colors && res.data.colors.length > 0)
+          setSelectedColor(res.data.colors[0]);
+      } catch (err) {
+        console.error("خطا در دریافت محصول:", err);
+      }
+    };
+    fetchProduct();
+  }, [id]);
+
+  if (!product) return <p className="text-white text-center mt-10">در حال بارگذاری...</p>;
 
   return (
-    <div className="text-white border flex-col md:flex-row items-center justify-center p-4">
+    <div className="text-white md:max-h-[700px] flex flex-col md:flex-row items-center justify-center p-4">
       <div className="max-w w-full bg-black rounded-2xl p-6 md:flex-row-reverse shadow-lg md:flex md:gap-6">
         
         {/* تصویر محصول */}
-        <div className="md:w-1/3 flex justify-center items-center">
-           <ProductImage src={hoodie} alt="هودی مشکی" className="w-full " />
+        <div className="md:w-1/3 flex justify-center">
+          <ProductImage src={product.image_url ? `http://localhost:5000${product.image_url}` : "/placeholder.png"} alt={product.name} />
         </div>
 
         {/* جزئیات محصول */}
         <div className="md:w-2/3 h-full">
           {/* عنوان و محبوبیت */}
           <ProductTitleAndPopularity
-            title="هودی مشکی"
-            category="پوشاک مردانه"
-            popularity="88.8%"
+            title={product.name}
+            category={product.category}
+            popularity={product.popularity || "0%"}
           />
 
           {/* Size, Color, Quantity, Description */}
           <div className="flex h-52 mt-3.5 gap-2">
             <SizeSelector
-              sizes={sizes}
+              sizes={product.sizes || []}
               selectedSize={selectedSize}
               setSelectedSize={setSelectedSize}
             />
 
             <ColorAndQuantitySelector
-              colors={colors}
+              colors={product.colors || []}
               selectedColor={selectedColor}
               setSelectedColor={setSelectedColor}
               quantity={quantity}
@@ -51,21 +72,21 @@ export function ProductDetail() {
             />
 
             <ProductDescription
-              description="هودی مشکی با طراحی مدرن و راحت، مناسب استفاده روزمره و ورزش. پارچه نرم و گرم برای روزهای سرد."
+              description={product.description || "توضیحی برای این محصول موجود نیست."}
             />
           </div>
 
           {/* قیمت و افزودن به سبد خرید */}
           <PriceAndAddToCart 
-            price={180.0} 
+            price={product.price}
             productData={{
-              id: 1,
-              title: "هودی مشکی",
-              image: hoodie,
+              id: product._id,
+              title: product.name,
+              image: product.image_url ? `http://localhost:5000${product.image_url}` : "/placeholder.png",
               selectedColor,
               selectedSize,
               quantity,
-              warranty: true
+              warranty: product.warranty || false
             }}
           />
         </div>
