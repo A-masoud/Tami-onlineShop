@@ -29,12 +29,13 @@ function AppRoutes() {
         </Route>
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/admin" element={<AdminPanel />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/login" element={<LoginPage modal backgroundLocation={location.state?.backgroundLocation || location} />} />
       </Routes>
 
       {location.state?.backgroundLocation && (
         <Routes>
-          <Route path="/login" element={<LoginPage modal />} />
+          <Route path="/login" element={<LoginPage modal backgroundLocation={location.state.backgroundLocation} />} />
+          <Route path="/signup" element={<SignupPage modal />} />
         </Routes>
       )}
     </>

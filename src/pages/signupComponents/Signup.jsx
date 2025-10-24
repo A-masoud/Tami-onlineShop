@@ -7,7 +7,7 @@ import { useState } from "react";
 import { schema } from "./yup";
 import { InputField } from "./InputField";
 
-export function SignupPage() {
+export function SignupPage({ modal = false, backgroundLocation }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState({ text: "", type: "" });
   const navigate = useNavigate();
@@ -31,13 +31,11 @@ export function SignupPage() {
     setLoading(false);
   }
 
-  // =================== submit handler ===================
   async function onSubmit(data) {
     try {
       setLoading(true);
       setMessage({ text: "", type: "" });
 
-      // ارسال داده‌ها به بک‌اند
       const res = await axios.post("http://localhost:5000/api/auth/signup", {
         fullName: data.fullName,
         email: data.email,
@@ -46,7 +44,9 @@ export function SignupPage() {
 
       handleSuccess(res.data.message);
       reset();
-      navigate("/");
+      setTimeout(() => {
+        navigate("/");
+      }, 1000);
     } catch (err) {
       if (err.response) handleError(err.response.data.message);
       else handleError("خطا در برقراری ارتباط با سرور");
@@ -54,74 +54,85 @@ export function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-tr from-gray-200 to-blue-400 flex items-center justify-center p-4 font-vazir">
-      <div className="bg-white rounded-3xl shadow-xl overflow-hidden w-full max-w-4xl grid md:grid-cols-2">
-        <div className="hidden md:flex items-center justify-center bg-white p-10">
-          <img src={imge} alt="Signup Illustration" className="max-h-200 shadow-lg" />
-        </div>
+    <div
+      className={
+        modal
+          ? "fixed inset-0 backdrop-blur-md bg-black/40 flex items-center justify-center z-50 p-4 font-vazir"
+          : "min-h-screen flex items-center justify-center p-4 font-vazir bg-neutral-700/30"
+      }
+    >
+      <div className="w-full max-w-4xl">
+        <div className="min-h-[500px] bg-neutral-700/30 border-white border items-center justify-center p-4 font-vazir rounded-3xl shadow-lg overflow-hidden grid md:grid-cols-2 mx-auto">
+          <div className="hidden md:flex items-center justify-center p-10">
+            <img src={imge} alt="Signup Illustration" className="max-h-80" />
+          </div>
 
-        <div className="flex flex-col justify-center p-10 text-right">
-          <h2 className="text-3xl font-semibold mb-1 text-gray-800">خوش اومدی!</h2>
-          <p className="text-lg text-purple-700 font-bold mb-6">ساخت حساب کاربری</p>
+          <div className="flex flex-col justify-center p-10 text-right">
+            <h2 className="text-3xl font-semibold mb-1 text-[#E6E4B2]">خوش آمدید</h2>
+            <p className="text-lg text-white font-bold mb-6">ساخت حساب کاربری</p>
 
-          <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
-            <InputField
-              label="نام کامل"
-              type="text"
-              placeholder="نام و نام خانوادگی"
-              register={register}
-              name="fullName"
-              error={errors.fullName?.message}
-              disabled={loading}
-            />
-            <InputField
-              label="ایمیل"
-              type="email"
-              placeholder="ایمیل خود را وارد کنید"
-              register={register}
-              name="email"
-              error={errors.email?.message}
-              disabled={loading}
-            />
-            <InputField
-              label="رمز عبور"
-              type="password"
-              placeholder="رمز عبور دلخواه"
-              register={register}
-              name="password"
-              error={errors.password?.message}
-              disabled={loading}
-            />
-            <InputField
-              label="تکرار رمز عبور"
-              type="password"
-              placeholder="رمز عبور را دوباره وارد کنید"
-              register={register}
-              name="confirmPassword"
-              error={errors.confirmPassword?.message}
-              disabled={loading}
-            />
+            {message.text && (
+              <div
+                className={`mb-4 p-2 rounded ${
+                  message.type === "success" ? "bg-green-200 text-green-800" : "bg-red-200 text-red-800"
+                }`}
+              >
+                {message.text}
+              </div>
+            )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className={`w-full py-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-400 text-white font-bold text-lg shadow-lg transition ${
-                loading ? "opacity-60 cursor-not-allowed" : "hover:opacity-90"
-              }`}
-            >
-              {loading ? "در حال ثبت‌نام..." : "ثبت‌نام"}
-            </button>
-          </form>
+            <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
+              <InputField
+                label="نام کامل"
+                type="text"
+                placeholder="نام و نام خانوادگی"
+                register={register}
+                name="fullName"
+                error={errors.fullName?.message}
+                disabled={loading}
+              />
+              <InputField
+                label="ایمیل"
+                type="email"
+                placeholder="ایمیل خود را وارد کنید"
+                register={register}
+                name="email"
+                error={errors.email?.message}
+                disabled={loading}
+              />
+              <InputField
+                label="رمز عبور"
+                type="password"
+                placeholder="رمز عبور دلخواه"
+                register={register}
+                name="password"
+                error={errors.password?.message}
+                disabled={loading}
+              />
+              <InputField
+                label="تکرار رمز عبور"
+                type="password"
+                placeholder="رمز عبور را دوباره وارد کنید"
+                register={register}
+                name="confirmPassword"
+                error={errors.confirmPassword?.message}
+                disabled={loading}
+              />
 
-          {message.text && (
-            <p
-              className={`mt-4 text-center ${
-                message.type === "success" ? "text-green-600" : "text-red-600"
-              }`}
-            >
-              {message.text}
-            </p>
-          )}
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 rounded-full bg-[#FA6320] text-white font-bold text-lg shadow-lg hover:opacity-90 transition disabled:opacity-50"
+              >
+                {loading ? "در حال ثبت‌نام..." : "ثبت‌نام"}
+              </button>
+
+              <p className="text-sm text-center text-[#E6E4B2]">
+                
+               ثبت‌نام با گوگل
+              </p>
+            </form>
+          </div>
         </div>
       </div>
     </div>

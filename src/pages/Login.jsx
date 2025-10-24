@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export function LoginPage({ modal = false }) {
+export function LoginPage({ modal = false, backgroundLocation }) {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
@@ -33,8 +33,8 @@ export function LoginPage({ modal = false }) {
 
   return (
     <div className={modal ? "fixed inset-0 backdrop-blur-md bg-black/40 flex items-center justify-center z-50" : "min-h-screen flex items-center justify-center"}>
-      <div className={modal ? "w-full max-w-4xl" : "w-full max-w-4xl"}>
-        <div className="min-h-[500px] bg-gradient-to-tr from-gray-900 to-[#FA6320] flex items-center justify-center p-4 font-vazir rounded-3xl shadow-lg overflow-hidden grid md:grid-cols-2 mx-auto">
+      <div className="w-full max-w-4xl">
+        <div className="min-h-[500px] bg-neutral-700/30 border-white border items-center justify-center p-4 font-vazir rounded-3xl shadow-lg overflow-hidden grid md:grid-cols-2 mx-auto">
           <div className="hidden md:flex items-center justify-center p-10">
             <img
               src="https://cdni.iconscout.com/illustration/premium/thumb/login-3305943-2757111.png"
@@ -56,7 +56,7 @@ export function LoginPage({ modal = false }) {
             <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label className="block text-sm font-medium text-gray-100 mb-1">ایمیل</label>
-                <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
+                <div className="flex items-center border-[#FA6320] border-2 bg-gray-100 rounded-full px-4 py-2">
                   <input
                     type="email"
                     placeholder="ایمیل را وارد کنید"
@@ -70,7 +70,7 @@ export function LoginPage({ modal = false }) {
 
               <div>
                 <label className="block text-sm font-medium text-gray-100 mb-1">رمز عبور</label>
-                <div className="flex items-center bg-gray-100 rounded-full px-4 py-2">
+                <div className="flex items-center border-[#FA6320] border-2 bg-gray-100 rounded-full px-4 py-2">
                   <input
                     type="password"
                     placeholder="رمز عبور را وارد کنید"
@@ -85,14 +85,19 @@ export function LoginPage({ modal = false }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-3 rounded-full bg-gradient-to-r from-orange-600 to-white text-white font-bold text-lg shadow-lg hover:opacity-90 transition disabled:opacity-50"
+                className="w-full py-3 rounded-full bg-[#FA6320] text-white font-bold text-lg shadow-lg hover:opacity-90 transition disabled:opacity-50"
               >
                 {loading ? "در حال ورود..." : "ورود"}
               </button>
 
-              <p className="text-sm text-center text-gray-600">
+              <p className="text-sm text-center text-[#E6E4B2]">
                 حساب کاربری ندارید؟
-                <Link to="/signup" className="text-blue-700 font-semibold mr-1">ثبت‌نام کنید</Link>
+                <span
+                  onClick={() => navigate("/signup", { state: { backgroundLocation } })}
+                  className="text-white font-semibold mr-1 cursor-pointer"
+                >
+                  ثبت‌نام کنید
+                </span>
               </p>
             </form>
           </div>

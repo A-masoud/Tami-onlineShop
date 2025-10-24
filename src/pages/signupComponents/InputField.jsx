@@ -1,7 +1,7 @@
 export function InputField({ label, type, placeholder, register, name, error, disabled }) {
   return (
     <div>
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <label className="block text-sm font-medium text-white mb-1">{label}</label>
       <input
         type={type}
         placeholder={placeholder}
