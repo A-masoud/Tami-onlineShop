@@ -5,7 +5,7 @@ import { Home } from "../pages/home/Home";
 import { ProductDetail } from "../pages/productDetailComponents/ProductDetail";
 import { NotFound } from "../pages/NotFound";
 import { Products } from "../pages/Products";
-import { Cart } from "../pages/Cart";
+import SearchResults from "../components/Header/SearchResults";
 import { MasoudCart } from "../pages/MasoudCart";
 import Category from "../components/Category";
 import AdminPanel from "../pages/AdminPanel";
@@ -22,9 +22,9 @@ function AppRoutes() {
           <Route index element={<Home />} />
           <Route path="products" element={<Products />} />
           <Route path="productdetail/:id" element={<ProductDetail />} />
-          <Route path="cart" element={<Cart />} />
           <Route path="masoudcart" element={<MasoudCart />} />
           <Route path="category" element={<Category />} />
+          <Route path="/search" element={<SearchResults/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
         <Route path="/signup" element={<SignupPage />} />

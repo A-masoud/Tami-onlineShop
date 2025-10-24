@@ -33,7 +33,7 @@ export function BlogSection() {
         {blogs.map((blog) => (
           <div
             key={blog.id}
-            className="relative h-64 rounded-xl shadow-gray-300 shadow-sm hover:shadow-md overflow-hidden transition flex items-end"
+            className="relative h-64 rounded-xl shadow-gray-300  shadow-sm hover:shadow-md overflow-hidden transition flex items-end"
             style={{
               backgroundImage: `url(${blog.image})`,
               backgroundSize: "cover",

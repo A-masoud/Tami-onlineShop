@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { ShoppingCart, ChevronDown, Search } from "lucide-react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from '../../assets/tommy shop logo.png'
 
 const cn = (...c) => c.filter(Boolean).join(" ");
@@ -11,6 +11,7 @@ export default function HeaderUp() {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled((window.scrollY || 0) > 8);
@@ -34,6 +35,14 @@ export default function HeaderUp() {
     const timeout = setTimeout(fetchSuggestions, 300);
     return () => clearTimeout(timeout);
   }, [query]);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    if (query.trim()) {
+      setSuggestions([]);
+      navigate(`/search?q=${encodeURIComponent(query)}`);
+    }
+  };
 
   return (
     <header
@@ -82,8 +91,8 @@ export default function HeaderUp() {
 
           <div className="flex items-center gap-2 relative">
             <div className="hidden md:flex items-center gap-2">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2" size={18} />
+              <form onSubmit={handleSearchSubmit} className="relative w-full">
+                <Search className="absolute text-[#FA6320] left-3 top-1/2 -translate-y-1/2" size={18} />
                 <input
                   className="peer w-56 lg:w-72 rounded-2xl bg-white/5 text-white placeholder-white/40 border border-white/10 outline-none py-2.5 pl-9 pr-4 focus:bg-white/10 focus:border-white/20 transition"
                   placeholder="دنبال چی می‌گردی؟"
@@ -93,13 +102,21 @@ export default function HeaderUp() {
                 {suggestions.length > 0 && (
                   <div className="absolute left-0 mt-1 w-full bg-black/80 backdrop-blur-md rounded-xl shadow-lg z-50 max-h-60 overflow-y-auto">
                     {suggestions.map((p) => (
-                      <div key={p._id} className="px-3 py-2 text-white hover:bg-white/10 cursor-pointer">
+                      <div
+                        key={p._id}
+                        className="px-3 py-2 text-white hover:bg-white/10 cursor-pointer"
+                        onClick={() => {
+                          setQuery(p.name);
+                          setSuggestions([]);
+                          navigate(`/search?q=${encodeURIComponent(p.name)}`);
+                        }}
+                      >
                         {p.name}
                       </div>
                     ))}
                   </div>
                 )}
-              </div>
+              </form>
             </div>
 
             <Link

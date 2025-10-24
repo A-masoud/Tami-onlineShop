@@ -14,7 +14,7 @@ const schema = Yup.object().shape({
 });
 
 const AddProduct = () => {
-  const [imageFile, setImageFile] = useState(null);
+  const [imageFiles, setImageFiles] = useState([]);
   const {
     register,
     handleSubmit,
@@ -25,18 +25,19 @@ const AddProduct = () => {
   });
 
   const categoriesList = [
-    "لباس مردانه",
-    "لباس زنانه",
+    "کت و شلوار",
+    "تیشرت",
     "کفش",
     "اکسسوری",
-    "زمستانی",
-    "تابستانی",
+    "ژاکت",
+    "کراوات",
+    "ساعت",
+    "شلوار",
+    "هودی"
   ];
 
   const onSubmit = async (data) => {
     const formData = new FormData();
-
-    // فیلدهای متنی
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("price", Number(data.price));
@@ -45,7 +46,6 @@ const AddProduct = () => {
     formData.append("discount", Number(data.discount || 0));
     formData.append("category", data.category);
 
-    // فیلدهایی که چند مقدار دارن
     const multiFields = ["colors", "sizes", "tags", "searchableKeywords"];
     multiFields.forEach((field) => {
       if (data[field]) {
@@ -54,64 +54,66 @@ const AddProduct = () => {
       }
     });
 
-    // تصویر
-    if (imageFile) formData.append("image", imageFile);
+    if (imageFiles.length > 0) {
+      imageFiles.forEach((file) => formData.append("images", file));
+    }
 
     try {
       await axios.post("http://localhost:5000/api/products", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-
       alert("✅ محصول با موفقیت اضافه شد!");
       reset();
-      setImageFile(null);
+      setImageFiles([]);
     } catch (err) {
       console.error(err);
       alert("❌ خطا در افزودن محصول!");
     }
   };
 
+  const handleFileChange = (e) => {
+    const newFiles = Array.from(e.target.files);
+    setImageFiles(prev => [...prev, ...newFiles]);
+  };
+
+  const removeFile = (index) => {
+    setImageFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="max-w-3xl mx-auto bg-gray-700 p-6 rounded-2xl shadow-md mt-8">
       <h2 className="text-2xl font-bold mb-6 text-center">افزودن محصول جدید</h2>
-
       <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         
-        {/* نام محصول */}
         <div>
           <input {...register("name")} placeholder="نام محصول" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">مثلاً: کاپشن مردانه مدل X</p>
           <p className="text-red-500 text-sm">{errors.name?.message}</p>
         </div>
 
-        {/* قیمت */}
         <div>
           <input {...register("price")} type="number" placeholder="قیمت (تومان)" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">عدد بدون کاما وارد شود</p>
           <p className="text-red-500 text-sm">{errors.price?.message}</p>
         </div>
 
-        {/* موجودی */}
         <div>
           <input {...register("stock")} type="number" placeholder="موجودی انبار" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">تعداد موجود از محصول</p>
           <p className="text-red-500 text-sm">{errors.stock?.message}</p>
         </div>
 
-        {/* تخفیف */}
         <div>
           <input {...register("discount")} type="number" placeholder="درصد تخفیف (اختیاری)" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">درصد عددی بین ۰ تا ۱۰۰</p>
         </div>
 
-        {/* برند */}
         <div>
           <input {...register("brand")} placeholder="برند" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">مثلاً: Zara یا Adidas</p>
           <p className="text-red-500 text-sm">{errors.brand?.message}</p>
         </div>
 
-        {/* دسته‌بندی (کشویی) */}
         <div>
           <select {...register("category")} className="border bg-gray-700 p-2 rounded w-full">
             <option value="">انتخاب دسته‌بندی</option>
@@ -123,44 +125,62 @@ const AddProduct = () => {
           <p className="text-red-500 text-sm">{errors.category?.message}</p>
         </div>
 
-        {/* رنگ‌ها */}
         <div>
           <input {...register("colors")} placeholder="رنگ‌ها با - جدا شوند" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">مثلاً: قرمز - آبی - مشکی</p>
         </div>
 
-        {/* سایزها */}
         <div>
           <input {...register("sizes")} placeholder="سایزها با - جدا شوند" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">مثلاً: S - M - L - XL</p>
         </div>
 
-        {/* تگ‌ها */}
         <div>
           <input {...register("tags")} placeholder="تگ‌ها با - جدا شوند" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">مثلاً: زمستانی - پرفروش - جدید</p>
         </div>
 
-        {/* کلیدواژه‌ها */}
         <div>
           <input {...register("searchableKeywords")} placeholder="کلمات کلیدی با - جدا شوند" className="border p-2 rounded w-full" />
           <p className="text-gray-500 text-sm mt-1">برای بهبود جستجو در سایت</p>
         </div>
 
-        {/* توضیحات */}
         <div className="md:col-span-2">
           <textarea {...register("description")} placeholder="توضیحات محصول" className="border p-2 rounded w-full" rows={4} />
           <p className="text-gray-500 text-sm mt-1">توضیحی درباره ویژگی‌ها و کاربرد محصول</p>
           <p className="text-red-500 text-sm">{errors.description?.message}</p>
         </div>
 
-        {/* تصویر */}
         <div className="md:col-span-2">
-          <input type="file" onChange={(e) => setImageFile(e.target.files[0])} accept="image/*" className="border p-2 rounded w-full" />
-          <p className="text-gray-500 text-sm mt-1">فایل تصویر را انتخاب کنید (jpg, png)</p>
+          <input
+            type="file"
+            multiple
+            onChange={handleFileChange}
+            accept="image/*"
+            className="border p-2 rounded w-full"
+          />
+          {imageFiles.length > 0 && (
+            <div className="mt-2 text-gray-200 text-sm">
+              <p>✅ تعداد فایل انتخاب شده: {imageFiles.length}</p>
+              <ul className="list-disc ml-5">
+                {imageFiles.map((file, idx) => (
+                  <li key={idx} className="flex justify-between items-center">
+                    {file.name}
+                    <button
+                      type="button"
+                      onClick={() => removeFile(idx)}
+                      className="text-red-400 hover:text-red-600 ml-2"
+                    >
+                      حذف
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <p className="text-gray-500 text-sm mt-1">می‌توانید چند فایل انتخاب کنید (jpg, png)</p>
         </div>
 
-        {/* دکمه ارسال */}
         <button
           type="submit"
           disabled={isSubmitting}
