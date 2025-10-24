@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromCart, clearCart } from "../redux/cartSlice";
 import { ShoppingBagIcon, TrashIcon } from "@heroicons/react/24/outline";
 
+
 export function MasoudCart() {
   const cartItems = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
@@ -77,7 +78,7 @@ export function MasoudCart() {
           {/* مجموع سمت چپ در دسکتاپ */}
           <div className="w-full sm:w-auto mb-8 flex sm:order-1 order-2 sm:gap-3 justify-between sm:justify-start items-center text-white"style={{ direction: "rtl", unicodeBidi: "embed" }}>
             <p className="text-sm">مجموع:</p>
-            <p className="font-bold text-lg">{totalPrice.toLocaleString()} تومان</p>
+            <p className="font-bold text-lg">{totalPrice.toLocaleString("fa-IR")} تومان</p>
           </div>
 
           {/* دکمه سمت راست */}
@@ -90,9 +91,10 @@ export function MasoudCart() {
         </div>
       </div>
 
-      <span className="text-gray-300 text-xs cursor-pointer mt-4">
+      <span className="text-gray-300 text-xs cursor-pointer my-6">
         _________ برای تکمیل سفارش وارد شوید _________
       </span>
+      
     </div>
   );
 }

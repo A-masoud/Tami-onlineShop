@@ -4,7 +4,7 @@ import "./HeroCardSlider.css";
 
 const HeroCardSlider = () => {
   return (
-    <div className="w-full h-full relative z-40">
+    <div className="w-full h-full ">
       {/* موبایل: افقی اسکرول */}
       <div 
         className="md:hidden w-full overflow-x-auto scrollbar-hide" 
@@ -28,7 +28,7 @@ const HeroCardSlider = () => {
           const handleMouseUp = () => {
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
-            container.style.cursor = 'grab';
+            container.style.cursor = 'grab';ی
           };
           
           document.addEventListener('mousemove', handleMouseMove);

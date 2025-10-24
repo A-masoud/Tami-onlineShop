@@ -56,7 +56,6 @@ export function FeaturedProducts() {
                     </p>
 
                 <button className="w-full bg-[#FA6320] text-black py-2 rounded-lg hover:bg-white transition">
-                  افزودن به سبد
                 </button>
               </div>
             </div>
